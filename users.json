@@ -1,0 +1,22 @@
+{
+    "jay_gupta@koolkanya.com": {
+        "email": "jay_gupta@koolkanya.com",
+        "sub": 122,
+        "name": "Jay122",
+        "password": "1234",
+        "picture": "https://res.cloudinary.com/koolkanya-com/image/upload/v1600943758/wcbjjgkg1tgngei91eeq.jpg"
+    },
+    "jayguptazzz@gmail.com": {
+        "email": "jayguptazzz@gmail.com",
+        "sub": 123,
+        "name": "Jay123",
+        "password": "1234",
+        "picture": "https://lh3.googleusercontent.com/ogw/ADGmqu-pcERVyPAMOUKTz-HfuElPX-h5LKSDQTe_K23MKg=s83-c-mo"
+    },
+    "jayguptazzz@outlook.com": {
+        "email": "jayguptazzz@outlook.com",
+        "sub": 1234,
+        "name": "Jay1234",
+        "password": "1234"
+    }
+}

@@ -1,25 +1,39 @@
 var jwt = require('jsonwebtoken');
+const usersJSON = require('../users.json');
 
 
 
 exports.authLogin = (request, response) => {
 
-    const userInfo = { // to be fetch from db after authentication
-        email: request.body.userName,
-        id: request.body.password,
-        name: `Jay${request.body.password}`
+    if (usersJSON[request.body.userName]) {
+        if (usersJSON[request.body.userName].password === request.body.password) {
+            const userInfo = { // to be fetch from db after authentication
+                email: request.body.userName,
+                id: usersJSON[request.body.userName].sub,
+                name: usersJSON[request.body.userName].name,
+                picture: usersJSON[request.body.userName].picture
+            }
+            const ssoToken = createToken(userInfo);
+
+            const redirectURL = `https://kool-kanya.tribe.so/auth/sso?ssoToken=${ssoToken}&redirect=/answers`
+
+            response.status(200).json({
+                status: "OK",
+                message: "Successfully Logged In",
+                ssoToken
+            });
+        } else {
+            response.status(401).json({
+                status: "Failed",
+                message: "Invalid Credentials"
+            });
+        }
+    } else {
+        response.status(404).json({
+            status: "Failed",
+            message: "Hey, looks like you haven't not register. please register"
+        });
     }
-
-    const ssoToken = createToken(userInfo);
-
-    const redirectURL = `https://kool-kanya.tribe.so/auth/sso?ssoToken=${ssoToken}&redirect=/answers`
-
-    console.log("ssoToken", ssoToken);
-    // response.redirect(redirectURL);
-    response.status(200).json({
-        status: "OK",
-        ssoToken
-    });
 }
 
 function createToken(user) {
