@@ -15,7 +15,8 @@ exports.authLogin = (request, response) => {
             }
             const ssoToken = createToken(userInfo);
 
-            const redirectURL = `https://kool-kanya.tribe.so/auth/sso?ssoToken=${ssoToken}&redirect=/answers`
+            const redirectURL = `https://kool-kanya.tribe.so/auth/sso?ssoToken=${ssoToken}&redirect=/answers`;
+            // window.location = redirectURL
 
             response.status(200).json({
                 status: "OK",
@@ -54,4 +55,21 @@ function createToken(user) {
     console.log("userData", userData)
 
     return jwt.sign(userData, privateKey, { algorithm: 'HS256' });
+}
+
+
+exports.register = (request, response) => {
+    const userInfo = { // to be save in database
+        email: request.body.email,
+        id: request.body.password,
+        name: request.body.name,
+    }
+    const ssoToken = createToken(userInfo);
+
+    response.status(200).json({
+        status: "OK",
+        message: "Successfully Signed Up",
+        ssoToken,
+        user: userInfo
+    });
 }
